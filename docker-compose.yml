@@ -1,0 +1,33 @@
+version: "3"
+services:
+  frontend:
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    image: app-ui
+    networks:
+      - beer-launcher-app
+  backend:
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    image: app-api
+    networks:
+      - beer-launcher-app
+    ports:
+      - "1883:1883"
+  nginx:
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    image: app-nginx
+    ports:
+      - "81:80"
+    networks:
+      - beer-launcher-app
+networks:
+  beer-launcher-app:
+    driver: bridge
