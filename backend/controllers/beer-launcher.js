@@ -5,7 +5,7 @@ const launchBeer = () => (req, res) => {
     return res.status(400).json({ error: 'position is required and must be a number'})
   }
 
-  client.publish(`launch-beer/}`, position.toString())
+  client.publish(`launch-beer`, position.toString())
 
   console.log(`launch beer to position ${position}`)
 
